@@ -1,6 +1,6 @@
 from django.shortcuts import render
 import requests
-API_KEY='3b39469e194c4d3ebc071e858ca902d3'
+
 # Create your views here.
 
 def index(request):
