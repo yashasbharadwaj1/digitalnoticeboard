@@ -9,8 +9,4 @@ urlpatterns=[
     path('Science/',views.Science,name='Science'),
     path('sports/',views.sports,name='sports'),
     path('technology/',views.technology,name='technology'),
-
-
-
 ]
-#Your API key is: 3b39469e194c4d3ebc071e858ca902d3
