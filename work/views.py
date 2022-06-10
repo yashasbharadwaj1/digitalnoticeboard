@@ -3,7 +3,24 @@ import requests
 
 # Create your views here.
 
-def index(request):
+def home(request):
+    return render(request, 'home.html')
+
+
+
+def annoucements(request):
+    return render(request, 'announcements.html')
+
+def publications(request):
+    return render(request, 'publications.html')
+
+def achievements(request):
+    return render(request, 'achievements.html')
+
+
+
+
+def newsindex(request):
     url=' https://newsapi.org/v2/top-headlines?country=in&apiKey=3b39469e194c4d3ebc071e858ca902d3'
     data=requests.get(url)
     response=data.json() 
