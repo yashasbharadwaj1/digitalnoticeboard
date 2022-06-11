@@ -1,33 +1,201 @@
-{% extends "../base/base.html" %}
-{% block title %}
-category list
-{% endblock %}
-{% block content %}
-{% include "base/nav.html" %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notifications</title>
+  </head>
 
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap");
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Roboto Condensed", sans-serif;
+    }
+    section {
+      width: 100%;
+      height: 100vh;
+      background: url(image/push.png);
+      background-size: cover;
+    }
 
+    section .leftbox {
+      width: 50%;
+      height: 100%;
+      float: left;
+      padding: 50px;
+      box-sizing: border-box;
+    }
 
-<div class="album py-5 bg-light">
-    <div class="container">
-      <div class="row">
-        <div class="col-12 pb-5">
-          <h1> List of {{catlist.cat}} </h1>
+    section .leftbox .content {
+      color: #fff;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 40px;
+      transition: 0.5s;
+    }
+    section .leftbox .content h1 {
+      font-size: 50px;
+      font-weight: bold;
+      text-decoration: underline;
+      margin: 0;
+      padding: 0;
+    }
+    section .leftbox .content p {
+      font-size: 20px;
+    }
+
+    section .leftbox .content:hover {
+      background: #e91e63;
+    }
+
+    section .notice {
+      position: relative;
+      width: 50%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      float: right;
+      box-sizing: border-box;
+    }
+
+    section .notice ul {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      margin: 0;
+      padding: 40px;
+      box-sizing: border-box;
+    }
+
+    section .notice ul li {
+      list-style: none;
+      background: #fff;
+      box-sizing: border-box;
+      height: 200px;
+      margin: 15px 0;
+    }
+
+    section .notice ul li .time {
+      position: relative;
+      padding: 20px;
+      background: #262626;
+      box-sizing: border-box;
+      width: 30%;
+      height: 100%;
+      float: left;
+      text-align: center;
+      transition: 0.5s;
+    }
+
+    section .notice ul li:hover .time {
+      background: #e91e63;
+    }
+
+    section .notice ul li .time h2 {
+      position: absolute;
+      margin: 0;
+      padding: 0;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #fff;
+      font-size: 60px;
+      line-height: 50px;
+    }
+
+    section .notice ul li .time h2 span {
+      font-size: 30px;
+    }
+
+    section .notice ul li .details {
+      padding: 20px;
+      background: #fff;
+      box-sizing: border-box;
+      width: 70%;
+      height: 100%;
+      float: left;
+    }
+
+    section .notice ul li .details h3 {
+      position: relative;
+      margin: 0;
+      padding: 0;
+      font-size: 22px;
+    }
+
+    section .notice ul li .details p {
+      position: relative;
+      margin: 10px 0 0;
+      padding: 0;
+      font-size: 16px;
+    }
+
+    section .notice ul li .details a {
+      display: inline-block;
+      text-decoration: none;
+
+      padding: 10px 15px;
+      border: 2px solid #262626;
+      margin-top: 15px;
+      font-size: 18px;
+      transition: 0.5s;
+    }
+    section .notice ul li .details a:hover {
+      background: #e91e63;
+      color: #fff;
+    }
+  </style>
+  <body>
+    <ul class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="#"></a>
+
+        <a
+          class="btn btn-sm btn-success"
+          href="{% url 'work:home' %}"
+          style="
+            padding: 8px;
+            float: right;
+            background-color: green;
+            color: white;
+          "
+          >Back to home </a
+        >
+      </li>
+    </ul>
+    <section>
+      {% for post in catlist.posts %}
+      <div class="leftbox">
+        <div class="content">
+          <h1>{{catlist.cat}}</h1>
+          <p>
+            Notifications are published on daily basis by the admin.which will
+            help you with keeping track of current happening in the college and
+            department.
+          </p>
         </div>
-        {% for post in catlist.posts %}
-        <div class="col-md-4">
-          <a class="text-dark" href="{{post.get_absolute_url}}">
-            <div class="card mb-4 box-shadow">
-              <div class="card-body">
-                <h2 style="font-size:18px;font-weight:bold">{{post.title|truncatechars:50}}</h2>
-                <p class="card-text">{{post.excerpt|truncatechars:50}}</p>
-              </div>
-            </div>
-          </a>
-        </div>
-        {% endfor %}
       </div>
-    </div>
-  </div>
-
-  {% include "base/footer.html" %}
-  {% endblock %}
+      <div class="notice">
+        <ul>
+          <li>
+            <div class="time">
+              <h3>{{post.publish}}</h3>
+            </div>
+            <div class="details">
+              <h3>{{post.title|truncatechars:50}}</h3>
+              <p>
+                {{post.excerpt}}
+              </p>
+              <a href="{{post.get_absolute_url}}">View Details</a>
+            </div>
+            <div style="clear: both"></div>
+          </li>
+          
+       
+        </ul>
+      </div>
+      {% endfor %}
+    </section>
+  </body>
+</html>
