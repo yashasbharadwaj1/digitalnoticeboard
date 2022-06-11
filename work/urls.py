@@ -1,19 +1,11 @@
 from django.urls import path 
 from .import views
+
+app_name = 'work'
 urlpatterns=[
     path('',views.home,name='home'),
-    path('announcements/',views.annoucements,name='announcements'),
-    path('publications/',views.publications,name='publications'),
-    path('achievements/',views.achievements,name='achievements'),
-
-
-    path('news/',views.newsindex,name='newsindex'),
-    path('search/',views.search,name='search'),
-    path('business/',views.business,name='business'),
-    path('entertainment/',views.entertainment,name='entertainment'),
-    path('health/',views.health,name='health'),
-    path('Science/',views.Science,name='Science'),
-    path('sports/',views.sports,name='sports'),
-    path('technology/',views.technology,name='technology'),
+    path('files/',views.FileView.as_view(),name='files'),
+    path('<slug:post>/', views.post_single, name='post_single'),
+    path('category/<category>/', views.CatListView.as_view(), name='category'),
 
 ]
