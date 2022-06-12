@@ -1,9 +1,11 @@
-from django.shortcuts import render,get_object_or_404
+from django.shortcuts import render,get_object_or_404,redirect
 from .models import Files,Post
 from django.views import generic
 from django.views.generic import ListView
 # Create your views here.
-
+from .models import Files
+from django.views import generic
+from django.contrib import messages
 
 def home(request):
     return render(request, 'home.html')
@@ -45,5 +47,22 @@ class FileView(generic.ListView):
         return Files.objects.order_by('-id')
 
 
+def uploadForm(request):
+	return render(request, 'upload.html')
+
+def uploadFile(request):
+    if request.method == 'POST':
+        filename = request.POST['filename']
+        owner = request.POST['owner']
+        pdf = request.FILES['pdf']
+        cover = request.FILES['cover']
+
+        a = Files(filename=filename, owner=owner, pdf=pdf, cover=cover)
+        a.save()
+        messages.success(request, 'Files Submitted successfully!')
+        return redirect('work:files')
+    else:
+        messages.error(request, 'Files was not Submitted successfully!')
+        return redirect('work:form')
 
 
