@@ -5,14 +5,9 @@
     <a
       class="btn btn-sm btn-success"
       href="{% url 'work:home' %}"
-      style="
-        padding: 8px;
-        float: right;
-        background-color: green;
-        color: white;
-      "
-      >Back to home </a
-    >
+      style="padding: 8px; float: right; background-color: green; color: white"
+      >Back to home
+    </a>
   </li>
 </ul>
 
@@ -28,7 +23,6 @@
         <i class="fas fa-table"></i>
         Uploaded Files
       </div>
-
 
       {% for message in messages %}
       <div
@@ -48,15 +42,15 @@
               class="table table-bordered"
               id="dataTable"
               width="100%"
-              cellspacing="0"
+              cellspacing=""
             >
               <thead>
                 <tr>
-                  <th>No</th>
-                  <th>Cover</th>
-                  <th>File Name</th>
-                  <th>Owner</th>
-                  <th>View</th>
+                  <th>S.No</th>
+                  <th>author image</th>
+
+                  <th>author name</th>
+                  <th>View paper</th>
                   <th>Download</th>
                 </tr>
               </thead>
@@ -75,7 +69,7 @@
                     <span class="text-muted">No cover</span>
                     {% endif %}
                   </td>
-                  <td>{{ file.filename }}</td>
+
                   <td>{{ file.owner }}</td>
                   <td>
                     {% if file.pdf %}
